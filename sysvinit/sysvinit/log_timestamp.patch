@@ -1,0 +1,35 @@
+---
+ sysvinit-2.88dsf/src/bootlogd.c |   13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+--- a/sysvinit-2.88dsf/src/bootlogd.c
++++ b/sysvinit-2.88dsf/src/bootlogd.c
+@@ -352,17 +352,26 @@ int consolename(char *res, int rlen)
+ void writelog(FILE *fp, unsigned char *ptr, int len)
+ {
+ 	time_t		t;
++        struct timespec ts;
+ 	char		*s;
+ 	char		tmp[8];
++        char            time_buf[64];
+ 	int		olen = len;
+ 	int		dosync = 0;
+ 	int		tlen;
++        int             pos;
+ 
+ 	while (len > 0) {
+ 		tmp[0] = 0;
+ 		if (didnl) {
+-			time(&t);
+-			s = ctime(&t);
++                        clock_gettime(CLOCK_REALTIME, &ts);
++                        pos = strftime(time_buf, sizeof(time_buf), "%FT%T", localtime(&ts.tv_sec));
++                        if (pos > 0) {
++                           snprintf(&time_buf[pos], sizeof(time_buf) - pos, ".%03ld", ts.tv_nsec/1000000);
++                           s = time_buf;
++                           }
++                        else
++			    s = ctime(&ts.tv_sec);
+ 			fprintf(fp, "%.24s: ", s);
+ 			didnl = 0;
+ 		}

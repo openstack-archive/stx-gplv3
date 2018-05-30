@@ -1,0 +1,41 @@
+From 604f198f6eb2d43452e35f51b98087a1bb872021 Mon Sep 17 00:00:00 2001
+From: Scott Little <scott.little@windriver.com>
+Date: Mon, 2 Oct 2017 17:01:00 -0400
+Subject: [PATCH 2/2] WRS:
+ meta-CGTS-5175-Add-instrumentation-to-debug-boot-failures.patch
+
+Conflicts:
+	SPECS/seabios.spec
+---
+ SPECS/seabios.spec | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/SPECS/seabios.spec b/SPECS/seabios.spec
+index 1603f16..d8c986f 100644
+--- a/SPECS/seabios.spec
++++ b/SPECS/seabios.spec
+@@ -37,6 +37,11 @@ Patch10: seabios-virtio-scsi-enumerate-luns-with-REPORT-LUNS.patch
+ Patch11: seabios-usb-uas-enumerate-luns-with-REPORT-LUNS.patch
+ # For bz#1472131 - Guest OS will down when disk enable the IOMMU for Virtio
+ Patch12: seabios-virtio-IOMMU-support.patch
++
++# WRS patches
++# CGTS-5175: Instance can not startup due to "No bootable device"
++Patch100: CGTS-5175-Add-instrumentation-to-debug-boot-failures.patch
++
+ BuildRequires: python iasl
+ ExclusiveArch: x86_64 %{power64}
+ 
+@@ -99,6 +104,9 @@ SeaVGABIOS is an open-source VGABIOS implementation.
+ %patch11 -p1
+ %patch12 -p1
+ 
++# WRS patches
++%patch100 -p1
++
+ %build
+ %ifarch x86_64
+ export CFLAGS="$RPM_OPT_FLAGS"
+-- 
+1.9.1
+

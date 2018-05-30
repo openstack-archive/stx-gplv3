@@ -1,0 +1,26 @@
+From 2278e76d2a6933e91ee176386f7aa86529c2d3e8 Mon Sep 17 00:00:00 2001
+From: Scott Little <scott.little@windriver.com>
+Date: Mon, 2 Oct 2017 17:01:00 -0400
+Subject: [PATCH 1/2] WRS: 0001-Update-package-versioning-for-TIS-format.patch
+
+Conflicts:
+	SPECS/seabios.spec
+---
+ SPECS/seabios.spec | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/SPECS/seabios.spec b/SPECS/seabios.spec
+index 0b255d3..1603f16 100644
+--- a/SPECS/seabios.spec
++++ b/SPECS/seabios.spec
+@@ -1,6 +1,6 @@
+ Name:           seabios
+ Version:        1.10.2
+-Release:        3%{?dist}.1
++Release:        3.el7_4.1%{?_tis_dist}.%{tis_patch_ver}
+ Summary:        Open-source legacy BIOS implementation
+ 
+ Group:          Applications/Emulators
+-- 
+1.9.1
+
