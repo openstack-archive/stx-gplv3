@@ -1,0 +1,8 @@
+python-psycopg2
+crontabs
+parted
+python-keyring
+rsync
+seabios
+grub2
+dnsmasq
