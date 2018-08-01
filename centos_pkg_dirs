@@ -1,5 +1,4 @@
 parted
 python-keyring
-rsync
 seabios
 grub2
